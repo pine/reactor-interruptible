@@ -1,5 +1,6 @@
 buildscript {
     ext {
+        reactorVersion = '3.3.0.RELEASE'
     }
     repositories {
         jcenter()
@@ -21,12 +22,16 @@ group 'moe.pine'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-repositories {
-    jcenter()
-}
-
 compileJava {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-Xlint:unchecked'
     options.compilerArgs << '-Xlint:deprecation'
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation "io.projectreactor:reactor-core:$reactorVersion"
 }
