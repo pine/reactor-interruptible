@@ -58,7 +58,7 @@ buildtimetracker {
 }
 
 
-// ----- SpotBugs -------------------------------------
+// ----- SpotBugs -----------------------------------------
 
 apply plugin: 'com.github.spotbugs'
 
@@ -76,7 +76,7 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 }
 
 
-// ----- PMD ------------------------------------------
+// ----- PMD ----------------------------------------------
 
 apply plugin: 'pmd'
 
