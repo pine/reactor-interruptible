@@ -1,5 +1,6 @@
 buildscript {
     ext {
+        junitVersion = '5.4.2'
         reactorVersion = '3.3.0.RELEASE'
     }
     repositories {
@@ -12,6 +13,8 @@ buildscript {
     }
 }
 
+
+// ----- Project ------------------------------------------
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -34,4 +37,39 @@ repositories {
 
 dependencies {
     implementation "io.projectreactor:reactor-core:$reactorVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
+
+
+// ----- Build Time Tracker -------------------------------
+
+apply plugin: 'build-time-tracker'
+
+buildtimetracker {
+    reporters {
+        summary {
+            ordered true
+            barstyle 'ascii'
+        }
+    }
+}
+
+
+// ----- SpotBugs -------------------------------------
+
+apply plugin: 'com.github.spotbugs'
+
+spotbugs {
+    toolVersion = '3.1.8'
+    excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
+    spotbugsTest.enabled = false
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
