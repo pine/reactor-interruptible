@@ -1,3 +1,5 @@
+// ----- Build script -------------------------------------
+
 buildscript {
     ext {
         junitVersion = '5.4.2'
@@ -73,3 +75,11 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
     }
 }
 
+
+// ----- PMD ------------------------------------------
+
+apply plugin: 'pmd'
+
+pmd {
+    toolVersion = '6.20.0'
+}
