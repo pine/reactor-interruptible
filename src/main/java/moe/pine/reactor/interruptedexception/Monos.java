@@ -1,15 +1,15 @@
-package moe.pine.reactor.interruptible;
+package moe.pine.reactor.interruptedexception;
 
 import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 
-public class InterruptibleMono {
+public class Monos {
     public static <T> T block(Mono<T> mono) throws InterruptedException {
-        return mono.block(); // TODO
+        return ReactiveExceptions.unwrapInterrupted(mono::block);
     }
 
     public static <T> T block(Mono<T> mono, Duration timeout) throws InterruptedException {
-        return mono.block(timeout); // TODO
+        return ReactiveExceptions.unwrapInterrupted(() -> mono.block(timeout));
     }
 }
