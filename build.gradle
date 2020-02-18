@@ -2,6 +2,15 @@
 
 buildscript {
     ext {
+        // Project details
+        version = '0.1.0'
+        description = 'Reactor InterruptedException utilities.'
+        group = 'moe.pine'
+        siteUrl = 'https://github.com/pine/reactor-interrupted-exceptions'
+        gitUrl = 'https://github.com/pine/reactor-interrupted-exceptions.git'
+        userOrg = 'pinemz'
+
+        // Dependencies
         junitVersion = '5.4.2'
         reactorVersion = '3.3.0.RELEASE'
     }
@@ -10,6 +19,8 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.6.11'
         classpath 'net.rdrei.android.buildtimetracker:gradle-plugin:0.11.0'
     }
@@ -83,3 +94,8 @@ apply plugin: 'pmd'
 pmd {
     toolVersion = '6.20.0'
 }
+
+
+// ----- Bintray ------------------------------------------
+
+apply from: "${rootProject.projectDir}/gradle/bintray.gradle"
