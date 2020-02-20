@@ -12,7 +12,9 @@ buildscript {
         userOrg = 'pinemz'
 
         // Dependencies
-        junitVersion = '5.4.2'
+        junitVersion = '4.12'
+        mockitoVersion = '2.24.5'
+        powermockVersion = '2.0.0'
         reactorVersion = '3.3.0.RELEASE'
     }
     repositories {
@@ -50,8 +52,13 @@ repositories {
 
 dependencies {
     implementation "io.projectreactor:reactor-core:$reactorVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "org.powermock:powermock-core:$powermockVersion"
+    testImplementation "org.powermock:powermock-reflect:$powermockVersion"
+    testImplementation "org.powermock:powermock-module-junit4:$powermockVersion"
+    testImplementation "org.powermock:powermock-module-junit4-rule:$powermockVersion"
+    testImplementation "org.powermock:powermock-api-mockito2:$powermockVersion"
 }
 
 
