@@ -1,10 +1,13 @@
-package moe.pine.reactor.interruptedexception;
+package moe.pine.reactor.interruptible;
 
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
-public class Fluxs {
+public class FluxUtils {
+    public FluxUtils() {
+    }
+
     public static <T> T blockFirst(Flux<T> flux) throws InterruptedException {
         return ReactiveExceptions.unwrapInterrupted(flux::blockFirst);
     }

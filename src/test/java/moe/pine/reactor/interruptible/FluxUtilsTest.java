@@ -1,38 +1,27 @@
-package moe.pine.reactor.interruptedexception;
+package moe.pine.reactor.interruptible;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.Timeout;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.powermock.api.mockito.PowerMockito.mock;
-import static org.powermock.api.mockito.PowerMockito.when;
+import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Flux.class)
-public class FluxsTest {
-    @Rule
-    public Timeout timeout = new Timeout(30L, TimeUnit.SECONDS);
-
+public class FluxUtilsTest {
     @Test
     @SuppressWarnings("unchecked")
     public void blockFirstTest() throws InterruptedException {
         Flux<Integer> flux = mock(Flux.class);
         when(flux.blockFirst()).thenReturn(1);
 
-        assertEquals(Integer.valueOf(1), Fluxs.blockFirst(flux));
+        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux));
 
         verify(flux).blockFirst();
         verifyNoMoreInteractions(flux);
@@ -46,7 +35,7 @@ public class FluxsTest {
         when(flux.blockFirst()).thenThrow(Exceptions.propagate(e1));
 
         try {
-            Fluxs.blockFirst(flux);
+            FluxUtils.blockFirst(flux);
             fail();
         } catch (InterruptedException e2) {
             assertSame(e1, e2);
@@ -63,7 +52,7 @@ public class FluxsTest {
         Flux<Integer> flux = mock(Flux.class);
         when(flux.blockFirst(duration)).thenReturn(1);
 
-        assertEquals(Integer.valueOf(1), Fluxs.blockFirst(flux, duration));
+        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux, duration));
 
         verify(flux).blockFirst(duration);
         verifyNoMoreInteractions(flux);
@@ -78,7 +67,7 @@ public class FluxsTest {
         when(flux.blockFirst(duration)).thenThrow(Exceptions.propagate(e1));
 
         try {
-            Fluxs.blockFirst(flux, duration);
+            FluxUtils.blockFirst(flux, duration);
             fail();
         } catch (InterruptedException e2) {
             assertSame(e1, e2);
