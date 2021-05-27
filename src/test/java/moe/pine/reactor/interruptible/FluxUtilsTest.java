@@ -14,10 +14,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-public class FluxUtilsTest {
+class FluxUtilsTest {
     @Test
     @SuppressWarnings("unchecked")
-    public void blockFirstTest() throws InterruptedException {
+    void blockFirstTest() throws InterruptedException {
         Flux<Integer> flux = mock(Flux.class);
         when(flux.blockFirst()).thenReturn(1);
 
@@ -29,7 +29,7 @@ public class FluxUtilsTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void blockFirstTest_interrupted() {
+    void blockFirstTest_interrupted() {
         InterruptedException e1 = new InterruptedException();
         Flux<Integer> flux = mock(Flux.class);
         when(flux.blockFirst()).thenThrow(Exceptions.propagate(e1));
@@ -47,7 +47,7 @@ public class FluxUtilsTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void blockFirstTest_withDuration() throws InterruptedException {
+    void blockFirstTest_withDuration() throws InterruptedException {
         Duration duration = Duration.ofSeconds(3L);
         Flux<Integer> flux = mock(Flux.class);
         when(flux.blockFirst(duration)).thenReturn(1);
@@ -60,7 +60,7 @@ public class FluxUtilsTest {
 
     @Test
     @SuppressWarnings("unchecked")
-    public void blockFirstTest_interrupted_withDuration() {
+    void blockFirstTest_interrupted_withDuration() {
         Duration duration = Duration.ofSeconds(3L);
         InterruptedException e1 = new InterruptedException();
         Flux<Integer> flux = mock(Flux.class);
