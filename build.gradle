@@ -6,10 +6,8 @@ buildscript {
         version = '0.1.0'
         description = 'Reactor InterruptedException utilities.'
         group = 'moe.pine'
-        websiteUrl = 'https://github.com/pine/reactor-interrupted-exceptions'
-        issueTrackerUrl = 'https://github.com/pine/reactor-interrupted-exceptions/issues'
-        gitUrl = 'https://github.com/pine/reactor-interrupted-exceptions.git'
-        userOrg = 'pinemz'
+        websiteUrl = 'https://github.com/pine/reactor-interruptible'
+        gitUrl = 'https://github.com/pine/reactor-interruptible.git'
 
         // Dependencies
         reactorVersion = '3.4.6.RELEASE'
@@ -102,6 +100,6 @@ pmd {
 }
 
 
-// ----- Bintray ------------------------------------------
+// ----- Publish --------------------------------------
 
-apply from: "${rootProject.projectDir}/gradle/bintray.gradle"
+apply from: "${rootProject.projectDir}/gradle/sonatype.gradle"
