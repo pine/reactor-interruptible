@@ -10,7 +10,7 @@ buildscript {
         gitUrl = 'https://github.com/pine/reactor-interruptible.git'
 
         // Dependencies
-        reactorVersion = '3.4.6.RELEASE'
+        reactorVersion = '3.4.7'
         junitVersion = '5.7.2'
         mockitoVersion = '3.10.0'
     }
@@ -73,6 +73,22 @@ buildtimetracker {
 }
 
 
+// ----- JaCoCo ---------------------------------------
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = '0.8.7'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+
+
 // ----- SpotBugs -----------------------------------------
 
 apply plugin: 'com.github.spotbugs'
@@ -96,7 +112,10 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 apply plugin: 'pmd'
 
 pmd {
-    toolVersion = '6.20.0'
+    toolVersion = '6.35.0'
+}
+pmdTest {
+    enabled = false
 }
 
 
