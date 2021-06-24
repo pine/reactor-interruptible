@@ -1,4 +1,4 @@
-## Reactor InterruptedException utilities
+## Reactor Interruptible
 
 ## Requirements
 
