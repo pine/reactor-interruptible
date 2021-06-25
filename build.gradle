@@ -96,14 +96,15 @@ apply plugin: 'com.github.spotbugs'
 spotbugs {
     toolVersion = '4.2.3'
     excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
-    spotbugsTest.enabled = false
 }
-
 spotbugsMain {
     reports {
         xml.enabled = false
         html.enabled = true
     }
+}
+spotbugsTest {
+    enabled = false
 }
 
 
