@@ -51,7 +51,7 @@ repositories {
 }
 
 dependencies {
-    api "io.projectreactor:reactor-core:$reactorVersion"
+    implementation "io.projectreactor:reactor-core:$reactorVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testImplementation 'org.assertj:assertj-core:3.20.2'
