@@ -94,12 +94,12 @@ jacocoTestReport {
 apply plugin: 'com.github.spotbugs'
 
 spotbugs {
-    toolVersion = '3.1.8'
+    toolVersion = '4.2.3'
     excludeFilter = file("${project.rootDir}/findbugs-exclude.xml")
     spotbugsTest.enabled = false
 }
 
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
+spotbugsMain {
     reports {
         xml.enabled = false
         html.enabled = true
