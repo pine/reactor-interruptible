@@ -1,5 +1,6 @@
 package moe.pine.reactor.interruptible;
 
+import moe.pine.reactor.interruptible.annotation.Nullable;
 import reactor.core.Exceptions;
 
 import java.util.List;
@@ -19,6 +20,7 @@ abstract class ReactiveExceptions {
         return Exceptions.unwrap(t) instanceof InterruptedException;
     }
 
+    @Nullable
     static <T> T unwrapInterrupted(Supplier<T> supplier) throws InterruptedException {
         try {
             return supplier.get();
