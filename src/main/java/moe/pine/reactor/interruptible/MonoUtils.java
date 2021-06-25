@@ -5,10 +5,7 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.util.Optional;
 
-public class MonoUtils {
-    public MonoUtils() {
-    }
-
+public abstract class MonoUtils {
     public static <T> T block(Mono<T> mono) throws InterruptedException {
         return ReactiveExceptions.unwrapInterrupted(mono::block);
     }

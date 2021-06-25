@@ -4,10 +4,7 @@ import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
-public class FluxUtils {
-    public FluxUtils() {
-    }
-
+public abstract class FluxUtils {
     public static <T> T blockFirst(Flux<T> flux) throws InterruptedException {
         return ReactiveExceptions.unwrapInterrupted(flux::blockFirst);
     }

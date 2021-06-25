@@ -14,21 +14,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+@SuppressWarnings("unchecked")
 class FluxUtilsTest {
     @Test
-    @SuppressWarnings("unchecked")
-    void blockFirstTest() throws InterruptedException {
-        Flux<Integer> flux = mock(Flux.class);
-        when(flux.blockFirst()).thenReturn(1);
-
-        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux));
-
-        verify(flux).blockFirst();
-        verifyNoMoreInteractions(flux);
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
     void blockFirstTest_interrupted() {
         InterruptedException e1 = new InterruptedException();
         Flux<Integer> flux = mock(Flux.class);
@@ -40,6 +28,17 @@ class FluxUtilsTest {
         } catch (InterruptedException e2) {
             assertSame(e1, e2);
         }
+
+        verify(flux).blockFirst();
+        verifyNoMoreInteractions(flux);
+    }
+
+    @Test
+    void blockFirstTest_notInterrupted() throws InterruptedException {
+        Flux<Integer> flux = mock(Flux.class);
+        when(flux.blockFirst()).thenReturn(1);
+
+        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux));
 
         verify(flux).blockFirst();
         verifyNoMoreInteractions(flux);

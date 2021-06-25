@@ -5,7 +5,7 @@ import reactor.core.Exceptions;
 import java.util.List;
 import java.util.function.Supplier;
 
-class ReactiveExceptions {
+abstract class ReactiveExceptions {
     static boolean isInterrupted(Throwable t) {
         if (Exceptions.isMultiple(t)) {
             List<Throwable> unwrappedExceptions = Exceptions.unwrapMultiple(t);
