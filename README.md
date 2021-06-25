@@ -1,4 +1,5 @@
 # Reactor Interruptible
+[![codecov](https://codecov.io/gh/pine/reactor-interruptible/branch/main/graph/badge.svg?token=BdEE5ZTyZm)](https://codecov.io/gh/pine/reactor-interruptible)
 
 ## Requirements
 
