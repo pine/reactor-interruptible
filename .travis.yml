@@ -6,4 +6,7 @@ jdk:
 
 script:
   - ./gradlew check jacocoTestReport
-  - bash <(curl -s https://codecov.io/bash)
+  - curl -fLso codecov https://codecov.io/bash;
+    VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
+    ls -la;
+    echo $VERSION;
