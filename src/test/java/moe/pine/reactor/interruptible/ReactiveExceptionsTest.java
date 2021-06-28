@@ -6,6 +6,7 @@ import reactor.core.Exceptions;
 
 import java.io.IOException;
 
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -15,6 +16,17 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @SuppressWarnings("ALL")
 class ReactiveExceptionsTest {
+    @Nested
+    class Constructor {
+        @Test
+        void constructor() {
+            assertThatNoException().isThrownBy(() -> {
+                new ReactiveExceptions() {
+                };
+            });
+        }
+    }
+
     @Nested
     class IsInterrupted {
         @Test

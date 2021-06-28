@@ -8,6 +8,7 @@ import reactor.core.publisher.Flux;
 import java.time.Duration;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatNoException;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -17,6 +18,17 @@ import static org.mockito.Mockito.when;
 
 @SuppressWarnings("ALL")
 class FluxUtilsTest {
+    @Nested
+    class Constructor {
+        @Test
+        void constructor() {
+            assertThatNoException().isThrownBy(() -> {
+                new FluxUtils() {
+                };
+            });
+        }
+    }
+
     @Nested
     class BlockFirst {
         @Test
