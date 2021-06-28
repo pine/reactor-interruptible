@@ -12,8 +12,17 @@
 - Reactor
 
 ## Getting started
+The library is published to Maven Central.
 
-TODO
+```gradle
+repositories {
+    mavenCentral()
+}
+
+depepdencies {
+    implementation "moe.pine:reactor-interruptible:$latestVersion"
+}
+```
 
 ## Development
 ### Upload Maven Central
