@@ -5,7 +5,10 @@ jdk:
   - openjdk11
 
 script:
-  - ./gradlew check jacocoTestReport
+  - ./gradlew check
+
+after_success:
+  - ./gradlew jacocoTestReport
   - curl -fLso codecov https://codecov.io/bash;
     VERSION=$(grep -o 'VERSION=\"[0-9\.]*\"' codecov | cut -d'"' -f2);
     ls -la;
