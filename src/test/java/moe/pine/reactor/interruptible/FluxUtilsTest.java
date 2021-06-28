@@ -36,7 +36,7 @@ class FluxUtilsTest {
             Flux<Integer> flux = mock(Flux.class);
             when(flux.blockFirst()).thenReturn(1);
 
-            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockFirst(flux));
+            assertThat(FluxUtils.blockFirst(flux)).isEqualTo(Integer.valueOf(1));
 
             verify(flux).blockFirst();
             verify(flux, never()).blockLast();
@@ -61,7 +61,7 @@ class FluxUtilsTest {
             Flux<Integer> flux = mock(Flux.class);
             when(flux.blockFirst(any())).thenReturn(1);
 
-            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockFirst(flux, duration));
+            assertThat(FluxUtils.blockFirst(flux, duration)).isEqualTo(Integer.valueOf(1));
 
             verify(flux).blockFirst(duration);
             verify(flux, never()).blockLast(any());
@@ -87,7 +87,7 @@ class FluxUtilsTest {
             Flux<Integer> flux = mock(Flux.class);
             when(flux.blockLast()).thenReturn(1);
 
-            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockLast(flux));
+            assertThat(FluxUtils.blockLast(flux)).isEqualTo(Integer.valueOf(1));
 
             verify(flux, never()).blockFirst();
             verify(flux).blockLast();
@@ -112,7 +112,7 @@ class FluxUtilsTest {
             Flux<Integer> flux = mock(Flux.class);
             when(flux.blockLast(any())).thenReturn(1);
 
-            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockLast(flux, duration));
+            assertThat(FluxUtils.blockLast(flux, duration)).isEqualTo(Integer.valueOf(1));
 
             verify(flux, never()).blockFirst(any());
             verify(flux).blockLast(duration);
