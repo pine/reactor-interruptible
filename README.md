@@ -25,6 +25,12 @@ depepdencies {
 ```
 
 ## Development
+### Test
+
+```
+$ ./gradlew clean check
+```
+
 ### Upload Maven Central
 
 ```
