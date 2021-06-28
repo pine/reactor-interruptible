@@ -1,6 +1,7 @@
 # Reactor Interruptible
 [![Build Status](https://travis-ci.com/pine/reactor-interruptible.svg?branch=main)](https://travis-ci.com/pine/reactor-interruptible)
 [![codecov](https://codecov.io/gh/pine/reactor-interruptible/branch/main/graph/badge.svg?token=BdEE5ZTyZm)](https://codecov.io/gh/pine/reactor-interruptible)
+[![Maven Central](https://img.shields.io/maven-central/v/moe.pine/reactor-interruptible)](https://search.maven.org/artifact/moe.pine/reactor-interruptible)
 
 :hourglass: Reactor InterruptedException utilities
 <br>
