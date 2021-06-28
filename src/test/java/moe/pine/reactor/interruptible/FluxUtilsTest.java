@@ -1,78 +1,121 @@
 package moe.pine.reactor.interruptible;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import reactor.core.Exceptions;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings("ALL")
 class FluxUtilsTest {
-    @Test
-    void blockFirstTest_interrupted() {
-        InterruptedException e1 = new InterruptedException();
-        Flux<Integer> flux = mock(Flux.class);
-        when(flux.blockFirst()).thenThrow(Exceptions.propagate(e1));
+    @Nested
+    class BlockFirst {
+        @Test
+        void interrupted() {
+            InterruptedException exception = new InterruptedException();
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockFirst()).thenThrow(Exceptions.propagate(exception));
 
-        try {
-            FluxUtils.blockFirst(flux);
-            fail();
-        } catch (InterruptedException e2) {
-            assertSame(e1, e2);
+            assertThatThrownBy(() -> FluxUtils.blockFirst(flux)).isSameAs(exception);
+
+            verify(flux).blockFirst();
+            verify(flux, never()).blockLast();
         }
 
-        verify(flux).blockFirst();
-        verifyNoMoreInteractions(flux);
-    }
+        @Test
+        void notInterrupted() throws InterruptedException {
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockFirst()).thenReturn(1);
 
-    @Test
-    void blockFirstTest_notInterrupted() throws InterruptedException {
-        Flux<Integer> flux = mock(Flux.class);
-        when(flux.blockFirst()).thenReturn(1);
+            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockFirst(flux));
 
-        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux));
-
-        verify(flux).blockFirst();
-        verifyNoMoreInteractions(flux);
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    void blockFirstTest_withDuration() throws InterruptedException {
-        Duration duration = Duration.ofSeconds(3L);
-        Flux<Integer> flux = mock(Flux.class);
-        when(flux.blockFirst(duration)).thenReturn(1);
-
-        assertEquals(Integer.valueOf(1), FluxUtils.blockFirst(flux, duration));
-
-        verify(flux).blockFirst(duration);
-        verifyNoMoreInteractions(flux);
-    }
-
-    @Test
-    @SuppressWarnings("unchecked")
-    void blockFirstTest_interrupted_withDuration() {
-        Duration duration = Duration.ofSeconds(3L);
-        InterruptedException e1 = new InterruptedException();
-        Flux<Integer> flux = mock(Flux.class);
-        when(flux.blockFirst(duration)).thenThrow(Exceptions.propagate(e1));
-
-        try {
-            FluxUtils.blockFirst(flux, duration);
-            fail();
-        } catch (InterruptedException e2) {
-            assertSame(e1, e2);
+            verify(flux).blockFirst();
+            verify(flux, never()).blockLast();
         }
 
-        verify(flux).blockFirst(duration);
-        verifyNoMoreInteractions(flux);
+        @Test
+        void interrupted_withDuration() {
+            Duration duration = Duration.ofSeconds(3L);
+            InterruptedException exception = new InterruptedException();
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockFirst(any())).thenThrow(Exceptions.propagate(exception));
+
+            assertThatThrownBy(() -> FluxUtils.blockFirst(flux, duration)).isSameAs(exception);
+
+            verify(flux).blockFirst(duration);
+            verify(flux, never()).blockLast(any());
+        }
+
+        @Test
+        void notInterrupted_withDuration() throws InterruptedException {
+            Duration duration = Duration.ofSeconds(3L);
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockFirst(any())).thenReturn(1);
+
+            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockFirst(flux, duration));
+
+            verify(flux).blockFirst(duration);
+            verify(flux, never()).blockLast(any());
+        }
+    }
+
+    @Nested
+    class BlockLast {
+        @Test
+        void interrupted() {
+            InterruptedException exception = new InterruptedException();
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockLast()).thenThrow(Exceptions.propagate(exception));
+
+            assertThatThrownBy(() -> FluxUtils.blockLast(flux)).isSameAs(exception);
+
+            verify(flux, never()).blockFirst();
+            verify(flux).blockLast();
+        }
+
+        @Test
+        void notInterrupted() throws InterruptedException {
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockLast()).thenReturn(1);
+
+            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockLast(flux));
+
+            verify(flux, never()).blockFirst();
+            verify(flux).blockLast();
+        }
+
+        @Test
+        void interrupted_withDuration() {
+            Duration duration = Duration.ofSeconds(3L);
+            InterruptedException exception = new InterruptedException();
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockLast(any())).thenThrow(Exceptions.propagate(exception));
+
+            assertThatThrownBy(() -> FluxUtils.blockLast(flux, duration)).isSameAs(exception);
+
+            verify(flux, never()).blockFirst(any());
+            verify(flux).blockLast(duration);
+        }
+
+        @Test
+        void notInterrupted_withDuration() throws InterruptedException {
+            Duration duration = Duration.ofSeconds(3L);
+            Flux<Integer> flux = mock(Flux.class);
+            when(flux.blockLast(any())).thenReturn(1);
+
+            assertThat(Integer.valueOf(1)).isEqualTo(FluxUtils.blockLast(flux, duration));
+
+            verify(flux, never()).blockFirst(any());
+            verify(flux).blockLast(duration);
+        }
     }
 }
