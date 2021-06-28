@@ -32,6 +32,8 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 
 group 'moe.pine'
+version rootProject.ext.version
+description rootProject.ext.description
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
