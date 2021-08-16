@@ -13,4 +13,10 @@
     <Method name="hashCode" />
     <Bug pattern="RCN_REDUNDANT_NULLCHECK_OF_NONNULL_VALUE" />
   </Match>
+
+  <Match>
+    <Class name="moe.pine.reactor.interruptible.MonoUtils" />
+    <Method name="blockOptional" />
+    <Bug pattern="NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE" />
+  </Match>
 </FindBugsFilter>
