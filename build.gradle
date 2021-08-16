@@ -3,7 +3,7 @@
 buildscript {
     ext {
         // Project details
-        version = '0.1.0'
+        version = '0.1.1'
         description = 'Reactor InterruptedException utilities.'
         group = 'moe.pine'
         websiteUrl = 'https://github.com/pine/reactor-interruptible'
