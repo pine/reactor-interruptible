@@ -1,5 +1,5 @@
 # Reactor Interruptible
-[![Build Status](https://travis-ci.com/pine/reactor-interruptible.svg?branch=main)](https://travis-ci.com/pine/reactor-interruptible)
+[![build](https://github.com/pine/reactor-interruptible/actions/workflows/build.yml/badge.svg)](https://github.com/pine/reactor-interruptible/actions/workflows/build.yml)
 [![codecov](https://codecov.io/gh/pine/reactor-interruptible/branch/main/graph/badge.svg?token=BdEE5ZTyZm)](https://codecov.io/gh/pine/reactor-interruptible)
 [![Maven Central](https://img.shields.io/maven-central/v/moe.pine/reactor-interruptible)](https://search.maven.org/artifact/moe.pine/reactor-interruptible)
 
